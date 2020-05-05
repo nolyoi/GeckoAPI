@@ -1,6 +1,8 @@
-require "gecko_scraper/version"
-
-module GeckoScraper
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./gecko_scraper/version"
+require_relative "./gecko_scraper/controller"
+require_relative "./gecko_scraper/concerns/repeatable"
+require_relative "./gecko_scraper/market"
+require 'json'
+require 'open-uri'
+require 'pry'
+require 'colorize'

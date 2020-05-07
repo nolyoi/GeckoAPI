@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "gecko_scraper"
+require "gecko_api"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

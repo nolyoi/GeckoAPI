@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "gecko_scraper"
+require_relative "../lib/gecko_api/version"
+require_relative "../lib/gecko_api/controller"
+require_relative "../lib/gecko_api/concerns/repeatable"
+require_relative "../lib/gecko_api/market"
+require 'json'
+require 'open-uri'
+require 'pry'
+require 'colorize'
+
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -10,5 +18,4 @@ require "gecko_scraper"
 # require "pry"
 # Pry.start
 
-require "irb"
-IRB.start(__FILE__)
+Pry.start(__FILE__)

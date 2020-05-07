@@ -1,16 +1,16 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "gecko_api/version"
+
 Gem::Specification.new do |spec|
   spec.name          = "gecko_api"
   spec.version       = GeckoAPI::VERSION
   spec.authors       = ["nolyoi"]
   spec.email         = ["nolan@moonship.cc"]
 
-  spec.summary       = %q{CoinGecko scraper.}
-  spec.description   = %q{CoinGecko scraper.}
-  spec.homepage      = "https://github.com/nolyoi/GeckoAPI"
+  spec.summary       = %q{Pulling data from CoinGecko's top 100 API and displaying it neatly in your command line.}
+  spec.description   = %q{Pulling data from CoinGecko's top 100 API and displaying it neatly in your command line.}
+  spec.homepage      = "https://nolanm.dev/"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

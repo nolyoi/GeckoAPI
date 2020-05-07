@@ -1,14 +1,20 @@
 # GeckoScraper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gecko_api`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
+To run the command-line program, first clone this repository
+
+    $ git clone git@github.com:nolyoi/GeckoAPI.git
+
+From the root directory (/gecko_api) run
+
+    $ ./bin/gecko_api
+
+To use this gem in another project you can do the following:
 
 Add this line to your application's Gemfile:
 
-```ruby
+```
+ruby
 gem 'gecko_api'
 ```
 

@@ -38,7 +38,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/gecko_api.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nolyoi/gecko_api.
 
 ## License
 

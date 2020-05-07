@@ -21,7 +21,6 @@ class Market
 			@symbol = data[i]["symbol"].to_s
 			@price = data[i]["current_price"].to_s
 			@price_movement_24h = data[i]["price_change_percentage_24h"]
-			@market_cap = data[i]["market_cap"].to_s
 			@market_cap_rank = data[i]["market_cap_rank"]
 			@@market << self.dup
 			i += 1
@@ -61,9 +60,9 @@ class Market
 				data = JSON.parse(open(BASE_URL + id).read)
 				Controller.clear_term
 				if data["market_data"]["price_change_percentage_24h"] > 0
-					print "#{data["name"].to_s.colorize(:red)} (#{data["symbol"].to_s.upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
+					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
 				else
-					print "#{data["name"].to_s.colorize(:red)} (#{data["symbol"].to_s.upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
+					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
 				end
 
 				# number formatting. making more human readable. outputs X.XXX Million/Billion

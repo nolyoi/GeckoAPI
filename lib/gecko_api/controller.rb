@@ -10,8 +10,8 @@ class Controller
 	end
 
 	def self.menu
-		puts "Type 'market <currency symbol>' to view top coins by market cap." 
-		puts "Type '<coin rank>' to view detailed information about a single asset."
+		puts "Type 'top' to view the top 100 projects by market cap." 
+		puts "Type a number 1-100 to view detailed information about a single asset."
 
 		input = gets.chomp
 		integer_input = input.to_i

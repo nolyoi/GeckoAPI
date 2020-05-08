@@ -5,7 +5,7 @@
 # markets?vs_currency=usd
 
 class Market
-	attr_accessor :id, :name, :symbol, :description, :algo, :price, :price_movement_24h, :market_cap, :market_cap_rank
+	attr_accessor :id, :name, :symbol, :price, :price_movement_24h, :market_cap_rank
 	BASE_URL =- "https://api.coingecko.com/api/v3/coins/"
 	@@market = []
 	@@list = []
@@ -34,6 +34,8 @@ class Market
 	def self.update
 		@@market = []
 		Market.new
+		Market.top
+		Controller.menu
 	end
 
 	def self.top
@@ -76,8 +78,10 @@ class Market
 				puts " "
 				puts "Total Market Cap: $#{data["market_data"]["market_cap"]["usd"].to_s[0..5].insert(-4, ".")} #{mktcap}"
 
-				# project description formatting. removing HTML elements like a hrefs
-				puts "#{data["description"]["en"]}"
+				# project description formatting. removing HTML elements but keeps links within parentheses
+				description = data["description"]["en"]
+				puts description.gsub(/<[^"\\] href="/, '(').gsub(/["\\]>/, ') ').gsub(/<[^<\\]a>/, '')
+
 			else
 				print "."
 			end

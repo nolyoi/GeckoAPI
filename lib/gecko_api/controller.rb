@@ -27,11 +27,7 @@ class Controller
 					Market.new
 					Market.top	
 				when "update"
-					Market.new
-					Market.top	
-				when "menu"
-					Controller.clear_term
-					Market.new
+					Market.update
 				else
 					puts "Invalid command. Please try again!".colorize(:red)
 					Controller.menu
@@ -39,12 +35,6 @@ class Controller
 			end	
 		end
 	end
-
-	def watchlist_new_error
-		puts "Sorry, we could not find " + id + "in the top 100 crypto projects. Please check your spelling or search for another coin!"
-
-	end
-
 
 	# resets the terminal history. makes the pages cleaner and more readable. checks platform to run correct command.
 	def self.clear_term

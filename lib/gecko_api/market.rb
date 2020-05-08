@@ -59,7 +59,7 @@ class Market
 	end
 
 	def self.coin(number)
-		a = Artii::Base.new :font => 'slant'
+		a = Artii::Base.new :font => 'isometric3'
 		puts "Searching"
 		@@market.each do |coin|
 			if coin.market_cap_rank.to_s == number
@@ -67,7 +67,8 @@ class Market
 				data = JSON.parse(open(BASE_URL + id).read)
 				Controller.clear_term
 				if data["market_data"]["price_change_percentage_24h"] > 0
-					puts a.asciify(data["name"])
+					puts a.asciify(data["symbol"].upcase)
+					puts " "
 					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
 				else
 					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
@@ -82,7 +83,12 @@ class Market
 
 				# formatting the marketcap number. taking the first 6 numbers of the string.
 				puts " "
-				puts "Total Market Cap: $#{data["market_data"]["market_cap"]["usd"].to_s[0..5].insert(-4, ".")} #{mktcap}"
+				puts "Total Market Cap: $#{data['market_data']['market_cap']['usd'].to_s[0..5].insert(-4, ".")} #{mktcap}"
+				puts "Website: #{data['links']['homepage'][0]}"
+				puts "Block Explorer: #{data['links']['blockchain_site'][0]}"
+				puts "GitHub: #{data['links']['repos_url']['github'][0]}"
+				puts "Mining Algorithm: #{data['hashing_algorithm']}"
+				puts "Block Time (minutes): #{data['block_time_in_minutes']}"
 				puts " "
 				puts "Description:".colorize(:red)
 				# project description formatting. removing HTML elements but keeps links within parentheses

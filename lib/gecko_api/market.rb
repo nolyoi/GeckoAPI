@@ -69,21 +69,17 @@ class Market
 				if data["market_data"]["price_change_percentage_24h"] > 0
 					puts a.asciify(data["symbol"].upcase)
 					puts " "
-					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
+					print "#{data["name"].colorize(:green)} (#{data["symbol"].upcase.colorize(:green)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
 				else
 					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
 				end
 
-				# number formatting. making more human readable. outputs X.XXX Million/Billion
-				if data["market_data"]["market_cap"]["usd"].digits.length > 11 
-					mktcap = "Billion"
-				else
-					mktcap = "Million"
-				end
+
+				mktcap = data['market_data']['market_cap']['usd'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
 
 				# formatting the marketcap number. taking the first 6 numbers of the string.
 				puts " "
-				puts "Total Market Cap: $#{data['market_data']['market_cap']['usd'].to_s[0..5].insert(-4, ".")} #{mktcap}"
+				puts "Total Market Cap: $#{mktcap}"
 				puts "Website: #{data['links']['homepage'][0]}"
 				puts "Block Explorer: #{data['links']['blockchain_site'][0]}"
 				puts "GitHub: #{data['links']['repos_url']['github'][0]}"

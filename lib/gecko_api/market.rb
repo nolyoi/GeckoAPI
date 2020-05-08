@@ -54,12 +54,11 @@ class Market
 		table = Terminal::Table.new :headings => ['Rank', 'Name', 'Symbol', 'Current Price'], :rows => rows
 		puts table
 		puts "==========================================="
-		puts "Type a coin ticker, ex. 'BTC', for more information or 'back' to return to the main menu."
 		Controller.menu
 	end
 
 	def self.coin(number)
-		a = Artii::Base.new :font => 'isometric3'
+		a = Artii::Base.new :font => 'roman'
 		puts "Searching"
 		@@market.each do |coin|
 			if coin.market_cap_rank.to_s == number
@@ -68,7 +67,6 @@ class Market
 				Controller.clear_term
 				if data["market_data"]["price_change_percentage_24h"] > 0
 					puts a.asciify(data["symbol"].upcase)
-					puts " "
 					print "#{data["name"].colorize(:green)} (#{data["symbol"].upcase.colorize(:green)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
 				else
 					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:red) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)

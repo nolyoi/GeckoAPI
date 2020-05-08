@@ -5,13 +5,15 @@ class Controller
 		puts "#{File.open("art.txt").read}\n"
 		welcome = "Welcome to the #{name.colorize(:green)} CLI!"
 		puts welcome
+		sleep(2)
 
-		Controller.menu	
+		Market.new
+		Market.top
+
 	end
 
 	def self.menu
-		puts "Type 'top' to view the top 100 projects by market cap." 
-		puts "Type a number 1-100 to view detailed information about a single asset."
+		puts "Type a number 1-100 to view detailed information about a single asset. Type 'update' to refresh prices. Type 'back' to go back."
 
 		input = gets.chomp
 		integer_input = input.to_i

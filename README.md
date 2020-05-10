@@ -1,24 +1,32 @@
 # GeckoScraper
 
 ## Installation
-To run the command-line program, first clone this repository
+1. To run the command-line program, first clone this repository
 
     $ git clone git@github.com:nolyoi/GeckoAPI.git
 
-From the root directory (/gecko_api) run
+2. CD into the root directory:
+    
+    $ cd GeckoAPI
+
+3. Install dependencies:
+
+    $ bundle install
+
+4. From the root directory (/gecko_api) run
 
     $ ./bin/gecko_api
 
-To use this gem in another project you can do the following:
+Or to use this gem in another project you can do the following:
 
-Add this line to your application's Gemfile:
+1. Add this line to your application's Gemfile:
 
 ```
 ruby
 gem 'gecko_api'
 ```
 
-And then execute:
+2. And then execute:
 
     $ bundle
 

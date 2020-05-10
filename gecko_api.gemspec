@@ -40,5 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~> 0.13.1"
   spec.add_development_dependency "colorize"
+  spec.add_development_dependency "terminal-table"
+  spec.add_development_dependency "artii"
 end
 

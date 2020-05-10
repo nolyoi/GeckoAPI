@@ -60,6 +60,7 @@ class Market
 	def self.coin(number)
 		a = Artii::Base.new :font => 'roman'
 		puts "Searching"
+
 		@@market.each do |coin|
 			if coin.market_cap_rank.to_s == number
 				id = coin.id
@@ -72,10 +73,10 @@ class Market
 					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:red) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
 				end
 
-
+				# formatting the market cap to be more human readable
 				mktcap = data['market_data']['market_cap']['usd'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
 
-				# formatting the marketcap number. taking the first 6 numbers of the string.
+				# project data
 				puts " "
 				puts "Total Market Cap: $#{mktcap}"
 				puts "Website: #{data['links']['homepage'][0]}"
@@ -88,11 +89,11 @@ class Market
 				# project description formatting. removing HTML elements but keeps links within parentheses
 				description = data["description"]["en"]
 				puts description.gsub(/<[^"\\] href="/, '(').gsub(/["\\]>/, ') ').gsub(/<[^<\\]a>/, '')
-
 			else
 				print "."
 			end
 		end
+		
 		puts " "
 		Controller.menu
 	end

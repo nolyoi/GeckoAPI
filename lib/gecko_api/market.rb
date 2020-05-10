@@ -59,7 +59,7 @@ class Market
 	end
 
 	def self.coin(number)
-		a = Artii::Base.new :font => 'roman'
+		a = Artii::Base.new :font => 'colossal'
 		puts "Searching"
 
 		@@market.each do |coin|

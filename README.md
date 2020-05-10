@@ -1,4 +1,4 @@
-# GeckoScraper
+# GeckoAPI
 
 ## Installation
 1. To run the command-line program, first clone this repository

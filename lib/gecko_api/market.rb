@@ -40,7 +40,8 @@ class Market
 
 	def self.top
 		i = 0
-		rows = []
+		rows = [] # rows for terminal-table
+
 		@@market.each do |coin|
 			if coin.price_movement_24h > 0
 				rows << ["#{i +1}", "#{coin.name}", "#{coin.symbol.upcase}", "$#{coin.price.colorize(:green)}"]
@@ -50,6 +51,7 @@ class Market
 				i += 1
 			end
 		end
+
 		table = Terminal::Table.new :headings => ['Rank', 'Name', 'Symbol', 'Current Price'], :rows => rows
 		puts table
 		puts "==========================================="
@@ -64,7 +66,9 @@ class Market
 			if coin.market_cap_rank.to_s == number
 				id = coin.id
 				data = JSON.parse(open(BASE_URL + id).read)
+				
 				Controller.clear_term
+
 				if data["market_data"]["price_change_percentage_24h"] > 0
 					puts a.asciify(data["symbol"].upcase)
 					print "#{data["name"].colorize(:green)} (#{data["symbol"].upcase.colorize(:green)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
@@ -85,6 +89,8 @@ class Market
 				puts "Block Time (minutes): #{data['block_time_in_minutes']}"
 				puts " "
 				puts "Description:".colorize(:red)
+				puts " "
+
 				# project description formatting. removing HTML elements but keeps links within parentheses
 				description = data["description"]["en"]
 				puts description.gsub(/<[^"\\] href="/, '(').gsub(/["\\]>/, ') ').gsub(/<[^<\\]a>/, '')

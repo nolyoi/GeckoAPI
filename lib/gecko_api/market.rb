@@ -8,7 +8,6 @@ class Market
 	attr_accessor :id, :name, :symbol, :price, :price_movement_24h, :market_cap_rank, :image
 	BASE_URL =- "https://api.coingecko.com/api/v3/coins/"
 	@@market = []
-	@@list = []
 
 	def initialize
 		data = JSON.parse(open(BASE_URL + "markets?vs_currency=usd").read)

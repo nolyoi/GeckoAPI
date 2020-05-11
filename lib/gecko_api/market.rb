@@ -1,11 +1,11 @@
- # Base API URI. Append coin name for individual details.
+# Base API URI. Append coin name for individual details.
 # https://api.coingecko.com/api/v3/coins/
 # 
 # Append for marketcap
 # markets?vs_currency=usd
 
 class Market
-	attr_accessor :id, :name, :symbol, :price, :description, :market_cap, :algo, :github, :website, :block_time, :block_explorer, :api_address, :price_movement_24h, :market_cap_rank, :image
+	attr_accessor :id, :name, :symbol, :price, :description, :market_cap, :percent_change, :algo, :github, :website, :block_time, :block_explorer, :api_address, :price_movement_24h, :market_cap_rank, :image
 	BASE_URL =- "https://api.coingecko.com/api/v3/coins/"
 	@@market = []
 
@@ -25,6 +25,7 @@ class Market
 			@algo = nil
 			@block_time = nil
 			@block_explorer = nil
+			@percent_change = nil
 			@@market << self
 	end
 
@@ -41,31 +42,29 @@ class Market
 	end
 
 	def coin_data
-			data = JSON.parse(open(self.api_address).read)
-			@description = data["description"]["en"].gsub(/<[^"\\] href="/, '(').gsub(/["\\]>/, ') ').gsub(/<[^<\\]a>/, '')
-			@github = data['links']['repos_url']['github'][0]
-			@website = data['links']['homepage'][0]
-			@algo = data['hashing_algorithm']
-			@block_time = data['links']['blockchain_site'][0]
-			@block_explorer = data['block_time_in_minutes'] 
+		data = JSON.parse(open(self.api_address).read)
+		@description = data["description"]["en"].gsub(/<[^"\\] href="/, '(').gsub(/["\\]>/, ') ').gsub(/<[^<\\]a>/, '')
+		@github = data['links']['repos_url']['github'][0]
+		@website = data['links']['homepage'][0]
+		@algo = data['hashing_algorithm']
+		@block_time = data['links']['blockchain_site'][0]
+		@block_explorer = data['block_time_in_minutes'] 
+		@percent_change = data["market_data"]["price_change_percentage_24h"]
 	end
 
 	def self.update
-		Market.top
-		Controller.menu
+		@@marker = []
+		Market.get_market
 	end
 
 	def self.top
-		i = 0
 		rows = [] # rows for terminal-table
 
 		@@market.each do |coin|
-			if coin.price_movement_24h > 0
-				rows << ["#{i +1}", "#{coin.name}", "#{coin.symbol.upcase}", "$#{coin.price.colorize(:green)}"]
-				i += 1
+			if coin.price_movement_24h.to_i > 0
+				rows << ["#{coin.market_cap_rank}", "#{coin.name}", "#{coin.symbol.upcase}", "$#{coin.price.colorize(:green)}"]
 			else
-				rows << ["#{i +1}", "#{coin.name}", "#{coin.symbol.upcase}", "$#{coin.price.colorize(:red)}"]
-				i += 1
+				rows << ["#{coin.market_cap_rank}", "#{coin.name}", "#{coin.symbol.upcase}", "$#{coin.price.colorize(:red)}"]
 			end
 		end
 
@@ -74,22 +73,14 @@ class Market
 	end
 
 	def self.coin_info(input)
-		@@market.each do |coin|
+		@@market.collect do |coin|
 			if coin.market_cap_rank == input.to_i
 				coin.coin_data
 			else
-				puts "."
+				print "."
 			end
 		end
-			# if data["market_data"]["price_change_percentage_24h"] > 0
-			# 	puts symbol.asciify(data["symbol"].upcase)
-			# 	print "#{data["name"].colorize(:green)} (#{data["symbol"].upcase.colorize(:green)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
-			# 	coin_description_title = coin_description_title.colorize(:green)
-			# else
-			# 	print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:red) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
-			# 	coin_description_title = coin_description_title.colorize(:red)
-			# end
-
+		Controller.clear_term
 	end
 
 end

@@ -8,7 +8,7 @@ class Controller
 		puts welcome
 		sleep(2)
 
-		Market.new
+		Market.get_market
 		Market.top
 		Controller.menu
 
@@ -27,9 +27,8 @@ class Controller
 		
 		if input.to_i > 0 and input.to_i < 101
 			Controller.clear_term
-			Market.coin(input)
-			puts "\n"
-			puts "\n"
+			Market.coin_info(input)
+
 			Controller.menu
 		else
 			case input.to_s
@@ -61,3 +60,4 @@ class Controller
    		end
 	end
 end
+

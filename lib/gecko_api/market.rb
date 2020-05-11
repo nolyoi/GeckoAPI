@@ -1,4 +1,4 @@
-# Base API URI. Append coin name for individual details.
+ # Base API URI. Append coin name for individual details.
 # https://api.coingecko.com/api/v3/coins/
 # 
 # Append for marketcap
@@ -54,8 +54,6 @@ class Market
 
 		table = Terminal::Table.new :headings => ['Rank', 'Name', 'Symbol', 'Current Price'], :rows => rows
 		puts table
-		puts "==========================================="
-		Controller.menu
 	end
 
 	def self.coin(number)
@@ -77,11 +75,11 @@ class Market
 				end
 
 				# formatting the market cap to be more human readable
-				mktcap = data['market_data']['market_cap']['usd'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+				total_matket_cap = data['market_data']['market_cap']['usd'].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
 
 				# project data
 				puts " "
-				puts "Total Market Cap: $#{mktcap}"
+				puts "Total Market Cap: $#{total_matket_cap}"
 				puts "Website: #{data['links']['homepage'][0]}"
 				puts "Block Explorer: #{data['links']['blockchain_site'][0]}"
 				puts "GitHub: #{data['links']['repos_url']['github'][0]}"
@@ -98,9 +96,6 @@ class Market
 				print "."
 			end
 		end
-		
-		puts " "
-		Controller.menu
 	end
 end
 

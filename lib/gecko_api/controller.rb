@@ -2,13 +2,16 @@
 class Controller
 	def call
 		name = "GeckoAPI"
-		puts "#{File.open("art.txt").read}\n"
 		welcome = "Welcome to the #{name.colorize(:green)} CLI!"
+		
+		puts "#{File.open("art.txt").read}\n"
 		puts welcome
 		sleep(2)
 
 		Market.new
 		Market.top
+		puts "==========================================="
+		Controller.menu
 
 	end
 
@@ -16,10 +19,11 @@ class Controller
 		puts "Type a number 1-100 to view detailed information about a single asset. Type 'update' to refresh prices. Type 'back' to go back."
 
 		input = gets.chomp
-		integer_input = input.to_i
 		
-		if integer_input > 0 and integer_input < 101
+		if input.to_i > 0 and input.to_i < 101
+			Controller.clear_term
 			Market.coin(input)
+			Controller.menu
 		else
 			case input.to_s
 				when "back"
@@ -28,6 +32,8 @@ class Controller
 				when "top"
 					Market.new
 					Market.top	
+					puts "==========================================="
+					Controller.menu
 				when "update"
 					Market.update
 				else

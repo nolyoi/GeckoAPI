@@ -4,7 +4,6 @@ require_relative "./gecko_api/market"
 require_relative "./gecko_api/concerns/repeatable"
 require 'json'
 require 'open-uri'
-require 'pry'
 require 'colorize'
 require 'terminal-table'
 require 'artii'

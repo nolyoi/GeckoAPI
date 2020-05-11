@@ -10,19 +10,26 @@ class Controller
 
 		Market.new
 		Market.top
-		puts "==========================================="
 		Controller.menu
 
 	end
 
 	def self.menu
-		puts "Type a number 1-100 to view detailed information about a single asset. Type 'update' to refresh prices. Type 'back' to go back."
+		puts "\n"
+		puts "==========================================="
+		puts "\n"
+		puts "Type a number 1-100 to view detailed information about a single asset."
+		puts "Type 'update' to refresh prices. Type 'back' to go back."
+		puts "\n"
+		puts "==========================================="
 
 		input = gets.chomp
 		
 		if input.to_i > 0 and input.to_i < 101
 			Controller.clear_term
 			Market.coin(input)
+			puts "\n"
+			puts "\n"
 			Controller.menu
 		else
 			case input.to_s

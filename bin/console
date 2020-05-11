@@ -3,7 +3,6 @@
 require "bundler/setup"
 require_relative "../lib/gecko_api/version"
 require_relative "../lib/gecko_api/controller"
-require_relative "../lib/gecko_api/concerns/repeatable"
 require_relative "../lib/gecko_api/market"
 require 'json'
 require 'open-uri'

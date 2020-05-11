@@ -57,7 +57,8 @@ class Market
 	end
 
 	def self.coin(number)
-		a = Artii::Base.new :font => 'colossal'
+		symbol = Artii::Base.new :font => 'colossal'
+		coin_description_title = "Description"
 		puts "Searching"
 
 		@@market.each do |coin|
@@ -68,10 +69,12 @@ class Market
 				Controller.clear_term
 
 				if data["market_data"]["price_change_percentage_24h"] > 0
-					puts a.asciify(data["symbol"].upcase)
+					puts symbol.asciify(data["symbol"].upcase)
 					print "#{data["name"].colorize(:green)} (#{data["symbol"].upcase.colorize(:green)}) " + "$".colorize(:green) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:green)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:green)}" + "%".colorize(:green)
+					coin_description_title = coin_description_title.colorize(:green)
 				else
 					print "#{data["name"].colorize(:red)} (#{data["symbol"].upcase.colorize(:red)}) " + "$".colorize(:red) + "#{data["market_data"]["current_price"]["usd"].to_s.colorize(:red)} - #{data["market_data"]["price_change_percentage_24h"].round(2).to_s.colorize(:red)}" + "%".colorize(:red)
+					coin_description_title = coin_description_title.colorize(:red)
 				end
 
 				# formatting the market cap to be more human readable
@@ -86,16 +89,15 @@ class Market
 				puts "Mining Algorithm: #{data['hashing_algorithm']}"
 				puts "Block Time (minutes): #{data['block_time_in_minutes']}"
 				puts " "
-				puts "Description:".colorize(:red)
+				puts coin_description_title
 				puts " "
 
 				# project description formatting. removing HTML elements but keeps links within parentheses
 				description = data["description"]["en"]
 				puts description.gsub(/<[^"\\] href="/, '(').gsub(/["\\]>/, ') ').gsub(/<[^<\\]a>/, '')
-			else
-				print "."
 			end
 		end
 	end
+
 end
 

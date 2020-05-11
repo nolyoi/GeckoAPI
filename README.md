@@ -1,38 +1,22 @@
 # GeckoAPI
+GeckoAPI is a command line program that allows you to interact with cryptocurrency market data of the top 100 projects. Browse the top 100 projects by market cap and view extended details from Coin Gecko's API.
 
 ## Installation
 1. To run the command-line program, first clone this repository
 
     $ git clone git@github.com:nolyoi/GeckoAPI.git
 
-2. CD into the root directory:
+2. CD into the programs root directory:
     
     $ cd GeckoAPI
 
 3. Install dependencies:
 
-    $ bundle install
+    $ ./bin/setup
 
-4. From the root directory (/gecko_api) run
+4. From the root directory (/gecko_api) run the binary:
 
     $ ./bin/gecko_api
-
-Or to use this gem in another project you can do the following:
-
-1. Add this line to your application's Gemfile:
-
-```
-ruby
-gem 'gecko_api'
-```
-
-2. And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install gecko_api
 
 ## Usage
 

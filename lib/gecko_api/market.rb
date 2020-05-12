@@ -73,7 +73,7 @@ class Market
 	end
 
 	def self.coin_info(input)
-		@@market.collect do |coin|
+		@@market.each do |coin|
 			if coin.market_cap_rank == input.to_i
 				coin.coin_data
 			else

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Base API URI. Append coin name for individual details.
 # https://api.coingecko.com/api/v3/coins/
 #
@@ -5,7 +7,9 @@
 # markets?vs_currency=usd
 
 class Market
-  attr_accessor :id, :name, :symbol, :price, :description, :market_cap, :percent_change, :algo, :github, :website, :block_time, :block_explorer, :api_address, :price_movement_24h, :market_cap_rank, :image
+  attr_accessor :id, :name, :symbol, :price, :description, :market_cap, :percent_change,
+                :algo, :github, :website, :block_time, :block_explorer, :api_address, 
+                :price_movement_24h, :market_cap_rank, :image
   BASE_URL = - 'https://api.coingecko.com/api/v3/coins/'
   @@market = []
 

@@ -61,6 +61,8 @@ class Controller
         Controller.menu
       when 'update'
         Market.update
+        Controller.clear_term
+        puts "#{File.open('art.txt').read}\n"
         Market.top
         Controller.menu
       else

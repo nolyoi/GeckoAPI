@@ -57,7 +57,7 @@ class Market
   end
 
   def self.update
-    @@marker = []
+    @@market = []
     Market.get_market
   end
 
@@ -66,13 +66,13 @@ class Market
 
     @@market.each do |coin|
       if coin.price_movement_24h.to_i > 0
-        rows << [coin.market_cap_rank, coin.name, coin.symbol.upcase, "$#{coin.price.colorize(:green)}"]
+        rows << [coin.market_cap_rank, coin.name, coin.symbol.upcase, "$#{coin.price.colorize(:green)}", "#{("+").colorize(:green)}#{coin.price_movement_24h.round(2).to_s.concat("%").colorize(:green)}"]
       else
-        rows << [coin.market_cap_rank, coin.name, coin.symbol.upcase, "$#{coin.price.colorize(:red)}"]
+        rows << [coin.market_cap_rank, coin.name, coin.symbol.upcase, "$#{coin.price.colorize(:red)}", "#{("-").colorize(:red)}#{coin.price_movement_24h.round(2).to_s.tr('-', '').concat("%").colorize(:red)}"]
       end
     end
 
-    table = Terminal::Table.new headings: ['Rank', 'Name', 'Symbol', 'Current Price'], rows: rows
+    table = Terminal::Table.new headings: ['Rank', 'Name', 'Symbol', 'Current Price', '% Change (24h)'], rows: rows
     puts table
   end
 
